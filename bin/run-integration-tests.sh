@@ -29,8 +29,11 @@ it_test() {
     mvn -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true clean install
 
     echo "Generating K8s resources for $docker_image and applying with kubectl"
-    "$RP" generate-kubernetes-resources --generate-all --registry-use-local "$docker_image" | kubectl apply --validate --dry-run -f - \
-      || die "Failed to generate & apply k8s resources for $docker_image"
+    "$RP" generate-kubernetes-resources --generate-all --registry-use-local "$docker_image" > x.yaml \
+      || die "Failed to generate k8s resources for $docker_image"
+    cat x.yaml
+    kubectl apply --validate --dry-run -f x.yaml \
+      || die "Failed to apply k8s resources for $docker_image"
 
     if [ -f "check.sh" ]; then
       echo "Running check.sh script"
