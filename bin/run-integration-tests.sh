@@ -9,6 +9,14 @@ mvn() {
   command mvn "$@" || die "Failed to run 'mvn $*' in ${PWD##*/}"
 }
 
+# WORKAROUND to:
+#     /usr/bin/rp: line 23: /usr/share/reactive-cli/bin/rp: No such file or directory
+if [ "$TRAVIS" = true ]; then
+  RP=bin/run-integration-tests.sh
+else
+  RP=rp
+fi
+
 it_test() {
   dir="$1"
   docker_image="$2"
@@ -19,7 +27,7 @@ it_test() {
     mvn -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true clean install
 
     echo "Generating K8s resources for $docker_image and applying with kubectl"
-    rp generate-kubernetes-resources --generate-all --registry-use-local "$docker_image" | kubectl apply --validate --dry-run -f - \
+    "$RP" generate-kubernetes-resources --generate-all --registry-use-local "$docker_image" | kubectl apply --validate --dry-run -f - \
       || die "Failed to generate & apply k8s resources for $docker_image"
 
     if [ -f "check.sh" ]; then
