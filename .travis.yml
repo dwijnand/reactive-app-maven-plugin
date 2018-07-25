@@ -22,7 +22,8 @@ install:
   sudo apt-get install reactive-cli=1.2.1 &&
   sudo apt-get install musl &&
   sudo find /usr -name "*libunwind*" -delete &&
-  sudo apt-get install clang libunwind8-dev
+  sudo apt-get install clang libunwind8-dev &&
+  sudo ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
 # Default "install" with GPG signing disabled
 ###- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -B -V
 
