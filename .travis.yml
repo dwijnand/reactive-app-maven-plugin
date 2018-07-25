@@ -20,6 +20,7 @@ install:
   sudo apt-get install apt-transport-https -y &&
   sudo apt-get update &&
   sudo apt-get install reactive-cli
+- chown 1000:1000 /usr/share/reactive-cli/bin/rp
 # Default "install" with GPG signing disabled
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -B -V
 
