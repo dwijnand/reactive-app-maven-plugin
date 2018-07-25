@@ -18,9 +18,10 @@ install:
   echo "deb https://dl.bintray.com/lightbend/deb $(lsb_release -cs) main" |
   sudo tee /etc/apt/sources.list.d/lightbend.list &&
   sudo apt-get install apt-transport-https -y &&
-  sudo apt-get update &&
+  sudo apt-get -qq update &&
   sudo apt-get install reactive-cli=1.2.1 &&
   sudo apt-get install musl &&
+  sudo apt-get install -y jq &&
   sudo find /usr -name "*libunwind*" -delete &&
   sudo apt-get install clang libunwind8-dev &&
   sudo ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
