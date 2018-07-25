@@ -53,7 +53,7 @@ script:
 - git clone https://github.com/lightbend/reactive-cli &&
   cd reactive-cli &&
   git checkout v1.3.0 &&
-  curl -LO https://git.io/sbt
+  curl -LO https://git.io/sbt &&
   ./sbt 'cliNative/run version'
 - exit 1 # fail the build
 # - bin/run-integration-tests.sh
