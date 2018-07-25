@@ -19,8 +19,7 @@ install:
   sudo tee /etc/apt/sources.list.d/lightbend.list &&
   sudo apt-get install apt-transport-https -y &&
   sudo apt-get update &&
-  sudo apt-get install reactive-cli &&
-  sudo apt-get install ia32-libs
+  sudo apt-get install reactive-cli
 # Default "install" with GPG signing disabled
 ###- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dgpg.skip=true -B -V
 
