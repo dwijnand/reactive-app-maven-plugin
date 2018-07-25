@@ -12,7 +12,7 @@ mvn() {
 # WORKAROUND to:
 #     /usr/bin/rp: line 23: /usr/share/reactive-cli/bin/rp: No such file or directory
 if [ "$TRAVIS" = true ]; then
-  RP=bin/run-integration-tests.sh
+  RP=bin/rp-from-source.sh
 else
   RP=rp
 fi
