@@ -9,10 +9,12 @@ mvn() {
   command mvn "$@" || die "Failed to run 'mvn $*' in ${PWD##*/}"
 }
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 # WORKAROUND to:
 #     /usr/bin/rp: line 23: /usr/share/reactive-cli/bin/rp: No such file or directory
 if [ "$TRAVIS" = true ]; then
-  RP=bin/rp-from-source.sh
+  RP="$DIR/rp-from-source.sh"
 else
   RP=rp
 fi
